@@ -92,7 +92,7 @@ ADT: not tied to a particular implementation - could also use a c style struct a
 
 ### Default constructors
 
-- we gave rational a default constructor `Rational()`
+- we gave rationLal a default constructor `Rational()`
   - a default constructor is a constructor that takes no arguments
 - Not all classes should have a default constructor
   - Eg: for a `Student` class, there is no sensible default for fields like name or birthday
@@ -149,3 +149,47 @@ Reason: The caller is responsible for pushing args onto the stack
 - This is simply not possible
 - **The caller must know the defaults so that it can push them and the caller imports .h files not .cc files**
 - will cause problems if the same .cc file is imported in multiple places
+
+### MIL: member initialization list
+
+```c
+// MIL
+Rational::Rational(int n, int d): num {n}, denom {d} {}
+
+// Alternative
+Rational::Rational(int n, int d) {
+  this->num = n;
+  this->denom = d;
+}
+```
+
+- MIL is considered best practice due to the object construction process
+- 4 steps to creating an object:
+  1. Memory is allocated (stack or head)
+  2. Call super class constructor
+  3. Initialize fields (usually done via MIL)
+  4. Constructor body is executed
+- Rule: By step 4, all object fields must be initialized
+  - there's no such thing as uninitialized objects
+  - primitive types can be uninitialized because of C backwards compatibility
+- if not provided with MIL they are initialized first with default constructors then overwritten
+  Example:
+
+```c
+struct C {
+  String s;
+  // suboptimal approach
+  C(string s) { // initializes s with default constructor
+    this->s = s; // overwrites s
+  }
+}
+```
+
+- MIL is significantly faster if the super class constructor is slow
+
+**cases where MIL is needed**
+
+- const fields
+- reference fields
+- object fields w/o default constructor
+- super class w/o default constructor
