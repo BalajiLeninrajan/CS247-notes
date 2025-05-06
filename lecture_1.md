@@ -68,7 +68,7 @@ Class Rational {
 ```c
 // this is an example of implicit conversion
 void f(std::string s) {}
-f("Hello"); // Hello is of type const char*
+f("Hello"); // "Hello" is of type const char* (string literal)
 ```
 
 The `explicit` keyword prevents implicit conversion from `int` to `Rational` in the constructor
@@ -96,3 +96,56 @@ ADT: not tied to a particular implementation - could also use a c style struct a
   - a default constructor is a constructor that takes no arguments
 - Not all classes should have a default constructor
   - Eg: for a `Student` class, there is no sensible default for fields like name or birthday
+- If you do not write a default constructor, the compiler will generate one for you
+  - object fields are initialized with their default constructors
+  - primitive fields are uninitialized - garbage memory
+- Writing any constructor will prevent the compiler from generating a default constructor
+  - if you want to use the default constructor, you must explicitly define it
+  - copy and move constructors are still generated
+
+### Default parameters
+
+```c
+#include <iostream>
+using namespace std;
+
+int main() {
+  Rational r, p, q; // define default ctor
+  cin >> r >> q;
+  p = q + r; // define addition
+  cout << q/r << endl;
+  Rational z{q};
+}
+
+Class Rational {
+  int num, denom;
+  public:
+    // using explicit here is valid, will come into play when any value is given
+    Rational(int n = 0, int d = 1): num {n}, denom {d} {}
+};
+
+```
+
+Note: Default parameters appear in declaration, not in the definition
+
+```c
+// Rational.h
+Class Rational {
+  int num, denom;
+  public:
+    // using explicit here is valid, will come into play when any value is given
+    Rational(int n = 0, int d = 1);
+}
+
+// Rational.cc
+// adding default parameters would throw a compile error
+Rational::Rational(int n, int d): num {n}, denom {d} {}
+
+```
+
+Reason: The caller is responsible for pushing args onto the stack
+
+- If default args are provided solely in the .cc file then the callee would need to push the default args onto the stack
+- This is simply not possible
+- **The caller must know the defaults so that it can push them and the caller imports .h files not .cc files**
+- will cause problems if the same .cc file is imported in multiple places
