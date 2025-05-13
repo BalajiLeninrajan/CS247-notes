@@ -1,4 +1,4 @@
-# CS 247 Lecture 1
+# CS 247 Lecture 1 _May 6th_
 
 ## Whats the point???
 
