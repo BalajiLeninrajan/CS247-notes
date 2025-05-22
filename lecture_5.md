@@ -67,17 +67,17 @@ class List {
     // same public methods
 
   class Iterator {
-    Node * cur; // where we are in the linked list
+    node * cur; // where we are in the linked list
     public:
-      explicit Iterator(Node * n) : cur(n) {} // constructor
+      explicit iterator(node * n) : cur(n) {} // constructor
       // operator overloads
       // not equals for conditional check
-      bool operator!=(const Iterator & other) const {
+      bool operator!=(const iterator & other) const {
         return cur != other.cur; // check if we are at the same node
       }
 
       // to go to next node
-      Iterator & operator++() {
+      iterator & operator++() {
         cur = cur->next; // go to next node
         return *this;
       }
@@ -86,7 +86,6 @@ class List {
       string operator*(){
         return cur->data; // return the data of the current node
       }
-    }
   }
 
   Iterator begin() {
