@@ -136,8 +136,27 @@ public:
 
       Friend class List;
   }
+
   // create the iterators
+
+  // the using keyword allows us to provide an alias for a type
   using Iterator = MyIterator<string&>;
   using CIterator = MyIterator<const string&>;
+
+  // this part is the same
+  Iterator begin() {
+    return Iterator(head);
+  }
+  Iterator end() {
+    return Iterator(nullptr);
+  }
+
+  // new overloads
+  CIterator begin() const {
+    return Iterator(head);
+  }
+  CIterator end() const {
+    return Iterator(nullptr);
+  }
 }
 ```
