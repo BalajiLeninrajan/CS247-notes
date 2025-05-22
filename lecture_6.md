@@ -182,6 +182,9 @@ Think about compilation when the implementation of the template is in `.cc` file
 - will produce linking error(s)
 - no `.cc` file will generate assembly code for the template class
 
+This is why `Node` in the example above is defined in the header file.
+`MyIterator` access `cur->data`, hence it need to know data is a field for `Nodes`
+
 ## Build systems and makefiles
 
 Ross said he doesn't like this part
