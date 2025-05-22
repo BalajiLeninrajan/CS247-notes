@@ -160,3 +160,28 @@ public:
   }
 }
 ```
+
+### How templates work
+
+For each case of `MyIterator<T>` the compiler creates a new class with the type `T`, kinda like a fancy find and replace on compile.
+The compiled code will be same the same if we wrote every iterator class by hand. Also
+
+# C++ TEMPLATES ARE TURING FUCKING COMPLETE 💀
+
+this information is not relevant to the course.
+
+### Notes for template classes
+
+Generally all implementation of a template class should be in the header(`.h`) file.
+Think about compilation when the implementation of the template is in `.cc` files.
+
+- `.cc` files are compiled separately then linked
+- When compiling a hypothetical `template.cc` file, we know the implementation of the file, but not the types.
+- Different types means different assembly
+- `main.cc` knows the types but not the template's implementation
+- will produce linking error(s)
+- no `.cc` file will generate assembly code for the template class
+
+## Build systems and makefiles
+
+Ross said he doesn't like this part
