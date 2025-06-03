@@ -134,9 +134,4 @@ b.isHeavy(); // calls Book::isHeavy() - bt is a copy of t, not a reference
 - is the method virtual in the static type's methods (or in any superclass of the static type)? Use dynamic type of the pointer/reference.
 - Non-virtual in the static types method or in superclasses' methods? Use static type of the pointer/reference.
 
-Declaring `isHeavy()` as `virtual`:
-
-```C
-vector<Book*> books;
-books.emplace_back()
-```
+The `override` keyword has no effect on the executable itself, nevertheless it's useful for catching bugs
