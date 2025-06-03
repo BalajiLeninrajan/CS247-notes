@@ -153,10 +153,10 @@ public:
 
   // new overloads
   CIterator begin() const {
-    return Iterator(head);
+    return CIterator(head);
   }
   CIterator end() const {
-    return Iterator(nullptr);
+    return CIterator(nullptr);
   }
 }
 ```
