@@ -85,7 +85,7 @@ class Textbook: public Book {
   public:
   // Why `Book(t, a, l), topic(topic)` instead of doing each field assignment manually?
   // fields are private and the MIL can only be used for direct fields of the class
-  // MIL doesn't work with inherited fields (public or private)
+  // MIL doesn'pt work with inherited fields (public or private)
   Textbook(String t, String a, int l, String topic)
     : Book(t, a, l), topic(topic) {}
   bool isHeavy() const override {
@@ -112,5 +112,31 @@ if(choice == "book") {
 // dynamic type of b: Book or Textbook pointer
 ```
 
-Static type: the type of the pointer/reference at compile time.
-Dynamic type: the underlying type of the object pointed to at runtime.
+Types of types:
+
+- Static type: the type of the pointer/reference at compile time.
+- Dynamic type: the underlying type of the object pointed to at runtime.
+  - Compiler generally does not know the dynamic type of a pointer/reference.
+
+How to figure out which `isHeavy()` is called?
+
+- Calling the method directly: **ALWAYS** use static type of the pointer/reference.
+
+```C
+Book b{...};
+Textbook t{...};
+b.isHeavy(); // calls Book::isHeavy()
+t.isHeavy(); // calls Textbook::isHeavy()
+Book bt = Textbook{...}; // compiles!
+b.isHeavy(); // calls Book::isHeavy() - bt is a copy of t, not a reference
+```
+
+- is the method virtual in the static type's methods (or in any superclass of the static type)? Use dynamic type of the pointer/reference.
+- Non-virtual in the static types method or in superclasses' methods? Use static type of the pointer/reference.
+
+Declaring `isHeavy()` as `virtual`:
+
+```C
+vector<Book*> books;
+books.emplace_back()
+```
