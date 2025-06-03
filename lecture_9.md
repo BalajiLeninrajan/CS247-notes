@@ -135,3 +135,27 @@ b.isHeavy(); // calls Book::isHeavy() - bt is a copy of t, not a reference
 - Non-virtual in the static types method or in superclasses' methods? Use static type of the pointer/reference.
 
 The `override` keyword has no effect on the executable itself, nevertheless it's useful for catching bugs
+
+### Why not use `virtual` everywhere?
+
+Because Java does that and Java is suck.
+
+1. Sometimes we will wish to control how our subclasses override methods.
+2. performance 🏎️
+
+```C
+Struct Vec{
+  int x, y;
+  void doSmth() {};
+}
+
+Struct Vec2{
+  int x, y;
+  virtual void doSmth() {};
+}
+
+Vec v1{1, 2}; // 8 bytes
+Vec2 v2; // 16 bytes
+```
+
+Adding virtual to a method add a virtual pointer which allows dynamic dispatch and inheritance, but it adds extra memory overhead and performance cost.
