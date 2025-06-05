@@ -1,4 +1,4 @@
-# CS247 Lecture 8 _June 3rd_
+# CS247 Lecture 9 _June 3rd_
 
 ## UML
 
