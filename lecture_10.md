@@ -140,3 +140,20 @@ class Circle : public Shape {
 
 The above program won't compile because `Shape` has a non-implemented method `area()`.
 We could give it a dummy value like `0`, but this won't prevent the user from calling `area()` on a `Shape` object, which is not what we want.
+
+Solution: make `area()` a pure virtual method, these methods do not require and implementation.
+
+```C++
+class Shape {
+public:
+  virtual float area() const = 0; // this is the syntax for a pure virtual method
+  // this doesn't return 0, it's just stupid syntax for backwards compatibility with C
+  ...
+};
+```
+
+Any class that has a pure virtual method is an abstract class, it cannot be instantiated.
+A concrete class is any class that is not abstract, it can be instantiated.
+Sub-classes of an abstract class remain abstract until they implement all pure virtual methods.
+
+In UML diagrams, pure virtual methods are either italicized or are surround with `*`s.
