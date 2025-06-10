@@ -85,7 +85,7 @@ class Textbook: public Book {
   public:
   // Why `Book(t, a, l), topic(topic)` instead of doing each field assignment manually?
   // fields are private and the MIL can only be used for direct fields of the class
-  // MIL doesn'pt work with inherited fields (public or private)
+  // MIL doesn't work with inherited fields (public or private)
   Textbook(String t, String a, int l, String topic)
     : Book(t, a, l), topic(topic) {}
   bool isHeavy() const override {
