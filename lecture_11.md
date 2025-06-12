@@ -20,7 +20,6 @@ This does work, we are given a compiler provided implementation of the copy, mov
 Text::Text(const Text& other) : Book(other), topic(other.topic) {}
 ```
 
-> [!NOTE]
 > there is a implicit conversion of other from `const Text&` to `const Book&`
 > when calling the Book copy constructor
 
@@ -29,7 +28,6 @@ Text::Text(const Text& other) : Book(other), topic(other.topic) {}
 Text::Text(Text&& other) : Book(std::move(other)), topic(std::move(other.topic)) {}
 ```
 
-> [!NOTE]
 > we use `std::move` to indicate that we are moving the object, not copying it.
 > even though other is a rvalue reference, it's value category is lvalue
 > if `std::move` isn't invoked we would copy instead of moving
